@@ -1,0 +1,6 @@
+streamlit
+anthropic
+requests
+playwright
+nest-asyncio
+openai
