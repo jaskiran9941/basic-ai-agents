@@ -1,0 +1,15 @@
+# Agentic Podcast Summarizer Requirements
+# Real podcast data implementation
+
+# Core AI
+openai>=1.3.0      # OpenAI SDK for GPT-4 tool calling
+
+# UI
+streamlit>=1.28.0
+
+# Podcast APIs
+feedparser>=6.0.10   # Parse RSS feeds
+requests>=2.31.0     # HTTP requests for iTunes API
+
+# Utilities
+python-dotenv>=1.0.0  # Environment variable management
