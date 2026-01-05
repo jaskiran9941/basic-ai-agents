@@ -1,0 +1,13 @@
+# Core dependencies
+anthropic>=0.75.0           # Anthropic SDK for Claude
+python-dotenv==1.0.0        # Environment variable management
+requests==2.31.0            # HTTP requests for API calls
+streamlit==1.31.0           # Web UI framework
+
+# Optional: For Phase 2 (Composio integration)
+# composio-core==0.3.0      # Uncomment when ready for Phase 2
+# composio-langchain==0.3.0 # If using with LangChain
+
+# Development tools
+pytest==7.4.3               # Testing framework
+black==23.12.1              # Code formatting
