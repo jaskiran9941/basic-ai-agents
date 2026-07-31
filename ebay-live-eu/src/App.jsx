@@ -40,7 +40,6 @@ import {
   Store,
   TrendingUp,
   Truck,
-  UserRound,
   Users,
   WandSparkles,
   X,
@@ -59,6 +58,13 @@ import {
 } from './data'
 
 const cx = (...classes) => classes.filter(Boolean).join(' ')
+
+function initialStageFor(role, max) {
+  const params = new URLSearchParams(window.location.search)
+  if (params.get('role') !== role) return 0
+  const stage = Number(params.get('stage'))
+  return Number.isInteger(stage) ? Math.min(Math.max(stage, 0), max) : 0
+}
 
 function EbayLogo() {
   return (
@@ -1876,9 +1882,11 @@ function JourneyControls({ stages, activeIndex, onBack, onNext }) {
 }
 
 function App() {
-  const [role, setRole] = useState('seller')
-  const [sellerStage, setSellerStage] = useState(0)
-  const [buyerStage, setBuyerStage] = useState(0)
+  const [role, setRole] = useState(() =>
+    new URLSearchParams(window.location.search).get('role') === 'buyer' ? 'buyer' : 'seller',
+  )
+  const [sellerStage, setSellerStage] = useState(() => initialStageFor('seller', sellerStages.length - 1))
+  const [buyerStage, setBuyerStage] = useState(() => initialStageFor('buyer', buyerStages.length - 1))
   const [destination, setDestination] = useState(destinationOptions[0])
   const [blueprintOpen, setBlueprintOpen] = useState(false)
   const [toast, setToast] = useState('')
@@ -1889,6 +1897,10 @@ function App() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    const params = new URLSearchParams()
+    params.set('role', role)
+    params.set('stage', String(activeIndex))
+    window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`)
   }, [role, activeIndex])
 
   useEffect(() => {
